@@ -54,10 +54,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\MainMenuDataLoader.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuNames.cs" />
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
-    <Compile Include="Assets\Scripts\MainMenuDataLoader.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
+    <Compile Include="Assets\Scripts\SideMenuDataLoader.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Menu\SideMenu.cs" />
+    <Compile Include="Assets\Scripts\Events\EventName.cs" />
+    <Compile Include="Assets\Scripts\Events\IntEventInvoker.cs" />
+    <Compile Include="Assets\Scripts\Menu\TopBarMenu.cs" />
+    <Compile Include="Assets\Scripts\Level1DataLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

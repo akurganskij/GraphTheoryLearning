@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LevelButton
   - LevelHeading
+  - StageHeading
   layers:
   - Default
   - TransparentFX

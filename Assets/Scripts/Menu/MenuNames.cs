@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuNames : MonoBehaviour
+public enum MenuNames
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    MainMenu,
+    SideMenu,
+    Level1Menu,
+    Level2Menu,
+    Level3Menu,
+    Level4Menu,
+    Level5Menu,
+    Level6Menu,
+    Level7Menu,
+    Level8Menu,
+    Level9Menu,
+    StandingsMenu,
+    DrawGraphModeMenu,
+    DrawGraph,
+    GraphByAdjMatrix,
+    GraphByAdjList,
+    GraphByEdgeList
 }
