@@ -55,16 +55,24 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
     <Compile Include="Assets\Scripts\MainMenuDataLoader.cs" />
+    <Compile Include="Assets\Scripts\Menu\SideMenu.cs" />
+    <Compile Include="Assets\Scripts\LevelDataLoader.cs" />
+    <Compile Include="Assets\Scripts\Menu\TopBarMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuNames.cs" />
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
-    <Compile Include="Assets\Scripts\CSVReader.cs" />
-    <Compile Include="Assets\Scripts\SideMenuDataLoader.cs" />
-    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Menu\SideMenu.cs" />
-    <Compile Include="Assets\Scripts\Events\EventName.cs" />
     <Compile Include="Assets\Scripts\Events\IntEventInvoker.cs" />
-    <Compile Include="Assets\Scripts\Menu\TopBarMenu.cs" />
-    <Compile Include="Assets\Scripts\Level1DataLoader.cs" />
+    <Compile Include="Assets\Scripts\Events\EventName.cs" />
+    <Compile Include="Assets\Scripts\SideMenuDataLoader.cs" />
+    <Compile Include="Assets\Scripts\CSVReader.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\ScreenPreferences.cs" />
+    <Compile Include="Assets\Scripts\Menu\LevelMenu.cs" />
+    <Compile Include="Assets\Scripts\Graph.cs" />
+    <Compile Include="Assets\Scripts\GraphBuilder.cs" />
+    <Compile Include="Assets\Scripts\Point.cs" />
+    <Compile Include="Assets\Scripts\Vector.cs" />
+    <Compile Include="Assets\Scripts\GraphFromAdjListLoader.cs" />
+    <Compile Include="Assets\Scripts\Level1Stage1Logic.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

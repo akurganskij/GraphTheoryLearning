@@ -17,32 +17,44 @@
         {
             "deviceId": "R58N72XL6KY",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 30818,
+            "processId": 10245,
             "exited": true
         },
         {
             "deviceId": "R58N72XL6KY",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 32628,
+            "processId": 13802,
             "exited": true
         },
         {
             "deviceId": "R58N72XL6KY",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 1291,
+            "processId": 18286,
             "exited": true
         },
         {
             "deviceId": "R58N72XL6KY",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 3675,
+            "processId": 20695,
             "exited": true
         },
         {
             "deviceId": "R58N72XL6KY",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 4565,
+            "processId": 23158,
             "exited": true
+        },
+        {
+            "deviceId": "R58N72XL6KY",
+            "name": "com.google.android.youtube",
+            "processId": 27947,
+            "exited": false
+        },
+        {
+            "deviceId": "R58N72XL6KY",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 10461,
+            "exited": false
         }
     ],
     "m_Tags": {

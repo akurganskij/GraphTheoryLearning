@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SideMenu : MonoBehaviour
 {
@@ -21,10 +22,21 @@ public class SideMenu : MonoBehaviour
 
     public void HandleDrawGraphButtonClickEvent()
     {
-
+        SceneManager.LoadScene("GraphFromAdjList");
     }
     public void HandleQuitButtonClickEvent()
     {
         Application.Quit();
+    }
+
+    private void Update()
+    {
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
