@@ -46,4 +46,12 @@ public class Vector
     {
         return Mathf.Sqrt(x * x + y * y);
     }
+
+    public Vector norm()
+    {
+        float di = d();
+        x /= di*di;
+        y /= di*di;
+        return this;
+    }
 }
