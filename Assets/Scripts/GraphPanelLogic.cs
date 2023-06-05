@@ -7,16 +7,21 @@ using UnityEngine.UI;
 public class GraphPanelLogic : MonoBehaviour
 {
     [SerializeField] GameObject edge;
+    [SerializeField] GameObject arrow;
     [SerializeField] GameObject vertex;
+    [SerializeField] GameObject vertexInfo;
     [SerializeField] Transform tr;
-
+    [SerializeField] float eps = 0.001f;
+    [SerializeField] float l = 10.0f;
+    [SerializeField] float delta = 0.999f;
+    [SerializeField] float cRep = 1.5f;
+    [SerializeField] float cSpr = 1.0f;
+    [SerializeField] int k = 10000;
 
     Graph graph;
     System.Random r = new System.Random();
     List<Point> points = new List<Point>();
     float minX = 5, maxX = 100, minY = 5, maxY=100;
-    const float eps = 0.001f, l = 10.0f, delta = 0.999f, cRep = 1.5f, cSpr = 1.0f;
-    const int k = 10000;
 
     private void Awake()
     {
@@ -30,7 +35,7 @@ public class GraphPanelLogic : MonoBehaviour
 
     public void HandleNewGraphButtonClickEvent()
     {
-        graph = GraphGenerator.generateRandom(r.Next(1, 8));
+        graph = GraphGenerator.generateRandomDirected(r.Next(1, 10));
         points.Clear();
         GraphBuilder graphBuilder = new GraphBuilder(graph, 0, 100);
         points = graphBuilder.evaluatePoints(eps, k, l, delta, cRep, cSpr);
@@ -61,6 +66,17 @@ public class GraphPanelLogic : MonoBehaviour
                     new Vector3(points[i-1].X, points[i-1].Y, 10),
                     new Vector3(points[j-1].X, points[j-1].Y, 10)
                 });
+                if (graph.IsOriented)
+                {
+                    Vector3 v1 = new Vector3(points[j - 1].X - points[i - 1].X,
+                        points[j - 1].Y - points[i - 1].Y, 0);
+                    float phi;
+                    phi = Mathf.Atan2(v1.y, v1.x);
+                    
+                    GameObject go1 = GameObject.Instantiate(arrow, new Vector3(
+                        points[j - 1].X, points[j - 1].Y, 10), 
+                        Quaternion.EulerAngles(0, 0, Mathf.PI + phi), tr);
+                }
             }
         }
         foreach (int j in graph.AdjacencyList.Keys)
@@ -70,21 +86,14 @@ public class GraphPanelLogic : MonoBehaviour
             go.transform.localScale = new Vector3(10, 10, 1);
             go.AddComponent<Text>();
             go.GetComponent<Text>().text = j.ToString();
-            Vector f = new Vector();
-            foreach (int i in graph.AdjacentVertex(j))
+
+            Vector3 shift = new Vector3(0, 0, 0);
+            foreach(int i in graph.AdjacencyList[j])
             {
-                f.Add(new Vector(points[i-1], points[j-1])).norm();
+                shift += new Vector3()
             }
-            if(f.Equals(new Vector()))
-            {
-                f = new Vector(new Point(1,1), new Point(0,0));
-            }
-            Point p = new Point(points[j-1].X, points[j-1].Y);
-            p.Translate(f.norm());
-            GameObject txt = new GameObject("VertexText");
-            txt.transform.SetParent(tr);
-            txt.transform.position = new Vector3(p.X, p.Y, 0);
-            txt.AddComponent<Text>();
+            GameObject txt = GameObject.Instantiate(vertexInfo, new Vector3(points[j - 1].X, 
+                points[j - 1].Y, 1) + shift, Quaternion.identity, tr);
             txt.GetComponent<Text>().text = j.ToString();
             
         }

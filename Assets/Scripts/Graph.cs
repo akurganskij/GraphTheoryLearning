@@ -77,4 +77,9 @@ public class Graph
         return new List<int>();
     }
 
+    public bool IsOriented
+    {
+        get { return isOriented; }
+    }
+
 }

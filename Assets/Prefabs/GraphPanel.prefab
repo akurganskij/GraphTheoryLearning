@@ -80,5 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   edge: {fileID: 8253732200448693810, guid: b7fc19774581d124bb94827cc8742a2e, type: 3}
+  arrow: {fileID: 6683483803563765103, guid: 50df7c82584d6354a9cb1d538209c6c5, type: 3}
   vertex: {fileID: 2289237016269573273, guid: fb6ec2c3b9174054d9ac5b82b2508f79, type: 3}
   tr: {fileID: 8853735407646324223}

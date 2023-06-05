@@ -8,6 +8,8 @@ TagManager:
   - LevelHeading
   - StageHeading
   - LevelInfo
+  - VertexNum
+  - AdjList
   layers:
   - Default
   - TransparentFX

@@ -5,17 +5,32 @@ using UnityEngine.UI;
 
 public class GraphFromAdjListLoader : MonoBehaviour
 {
-    public void HandleOnVertexInputEndedEvent()
+    Graph g;
+    public void HandleDrawButtonClickEvent()
     {
-        Text inp = gameObject.GetComponent<Text>();
-        int v;
-        if (int.TryParse(inp.text, out v))
+        string v = GameObject.FindGameObjectWithTag("VertexNum").GetComponent<Text>().text;
+        string l = GameObject.FindGameObjectWithTag("AdjList").GetComponent<Text>().text;
+        try
         {
-            if (v > 0)
+            g = new Graph(true);
+            int n = int.Parse(v);
+            g.V = n;
+            string[] s = l.Split('\n');
+            string k;
+            for (int i = 0; i < n; i++)
             {
-
+                k = s[i];
+                k.Remove(0, k.IndexOf(':'));
+                string[] vs = k.Split(' ');
+                for (int j = 0; j < vs.Length; j++)
+                {
+                    g.AddEdge(i + 1, int.Parse(vs[j]));
+                }
             }
-            else inp.text = "";
+        }
+        catch (System.Exception e)
+        {
+
         }
     }
 }
