@@ -25,17 +25,17 @@ public class GraphPanelLogic : MonoBehaviour
 
     private void Awake()
     {
-        Vector3[] corners = new Vector3[4];
-        tr.GetComponent<RectTransform>().GetWorldCorners(corners);
-        minX = corners[1].x * 0.9f;
-        minY = corners[3].y * 0.9f;
-        maxX = corners[3].x * 0.9f;
-        maxY = corners[1].y * 0.9f;
+        minX = -tr.GetComponent<RectTransform>().rect.width / 2 * 0.9f;
+        minY = tr.GetComponent<RectTransform>().rect.y * 0.9f;
+        maxX = tr.GetComponent<RectTransform>().rect.width / 2 * 0.9f;
+        maxY = (tr.GetComponent<RectTransform>().rect.y + tr.GetComponent<RectTransform>().rect.height) * 0.9f;
     }
+    
 
     public void HandleNewGraphButtonClickEvent()
     {
-        graph = GraphGenerator.generateRandomDirected(r.Next(1, 10));
+        Awake();
+        graph = GraphGenerator.generateRandom(r.Next(1, 7));
         points.Clear();
         GraphBuilder graphBuilder = new GraphBuilder(graph, 0, 100);
         points = graphBuilder.evaluatePoints(eps, k, l, delta, cRep, cSpr);
@@ -63,37 +63,34 @@ public class GraphPanelLogic : MonoBehaviour
                 GameObject go = GameObject.Instantiate(edge, tr);
                 go.GetComponent<LineRenderer>().SetPositions(new Vector3[]
                 {
-                    new Vector3(points[i-1].X, points[i-1].Y, 10),
-                    new Vector3(points[j-1].X, points[j-1].Y, 10)
+                    new Vector3(points[i-1].X, points[i-1].Y, -100),
+                    new Vector3(points[j-1].X, points[j-1].Y, -100)
                 });
                 if (graph.IsOriented)
                 {
                     Vector3 v1 = new Vector3(points[j - 1].X - points[i - 1].X,
-                        points[j - 1].Y - points[i - 1].Y, 0);
+                        points[j - 1].Y - points[i - 1].Y, -100);
                     float phi;
                     phi = Mathf.Atan2(v1.y, v1.x);
                     
                     GameObject go1 = GameObject.Instantiate(arrow, new Vector3(
-                        points[j - 1].X, points[j - 1].Y, 10), 
+                        points[j - 1].X, points[j - 1].Y, -100), 
                         Quaternion.EulerAngles(0, 0, Mathf.PI + phi), tr);
+                    go1.transform.localPosition = new Vector3(
+                        points[j - 1].X, points[j - 1].Y, -100);
                 }
             }
         }
         foreach (int j in graph.AdjacencyList.Keys)
         {
             GameObject go = GameObject.Instantiate(vertex,
-                new Vector3(points[j-1].X, points[j-1].Y, 0), Quaternion.identity, tr);
-            go.transform.localScale = new Vector3(10, 10, 1);
-            go.AddComponent<Text>();
-            go.GetComponent<Text>().text = j.ToString();
+                new Vector3(points[j-1].X, points[j-1].Y, -100), Quaternion.identity, tr);
+            go.transform.localPosition = new Vector3(points[j - 1].X, points[j - 1].Y, -100);
+            go.transform.localScale = new Vector3(10, 10, -100);
 
-            Vector3 shift = new Vector3(0, 0, 0);
-            foreach(int i in graph.AdjacencyList[j])
-            {
-                shift += new Vector3()
-            }
             GameObject txt = GameObject.Instantiate(vertexInfo, new Vector3(points[j - 1].X, 
-                points[j - 1].Y, 1) + shift, Quaternion.identity, tr);
+                points[j - 1].Y, -103), Quaternion.identity, tr);
+            txt.transform.localPosition = new Vector3(points[j - 1].X, points[j -1].Y, -103);
             txt.GetComponent<Text>().text = j.ToString();
             
         }
@@ -128,5 +125,10 @@ public class GraphPanelLogic : MonoBehaviour
             p.Y += minY;
         }
         
+    }
+
+    public Graph CurrentGraph
+    {
+        get { return graph; }
     }
 }

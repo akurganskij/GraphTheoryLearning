@@ -24,6 +24,11 @@ public static class MenuManager
                     SceneManager.LoadScene("Level1Menu");
                     break;
                 }
+            case MenuNames.Level1Stage1:
+                {
+                    SceneManager.LoadScene("Level1Stage1");
+                    break;
+                }
             case MenuNames.Level2Menu:
                 {
                     SceneManager.LoadScene("Level2Menu");

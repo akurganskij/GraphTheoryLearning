@@ -7,6 +7,7 @@ public enum MenuNames
     MainMenu,
     SideMenu,
     Level1Menu,
+    Level1Stage1,
     Level2Menu,
     Level3Menu,
     Level4Menu,
