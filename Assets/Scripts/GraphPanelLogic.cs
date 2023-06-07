@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class GraphPanelLogic : MonoBehaviour
 {
+    [SerializeField] int maxVertex;
+    [SerializeField] GraphTypes graphType;
+
     [SerializeField] GameObject edge;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject vertex;
@@ -30,12 +33,16 @@ public class GraphPanelLogic : MonoBehaviour
         maxX = tr.GetComponent<RectTransform>().rect.width / 2 * 0.9f;
         maxY = (tr.GetComponent<RectTransform>().rect.y + tr.GetComponent<RectTransform>().rect.height) * 0.9f;
     }
-    
+
+    private void Start()
+    {
+        HandleNewGraphButtonClickEvent();
+    }
 
     public void HandleNewGraphButtonClickEvent()
     {
         Awake();
-        graph = GraphGenerator.generateRandom(r.Next(1, 7));
+        createGraph();
         points.Clear();
         GraphBuilder graphBuilder = new GraphBuilder(graph, 0, 100);
         points = graphBuilder.evaluatePoints(eps, k, l, delta, cRep, cSpr);
@@ -69,15 +76,15 @@ public class GraphPanelLogic : MonoBehaviour
                 if (graph.IsOriented)
                 {
                     Vector3 v1 = new Vector3(points[j - 1].X - points[i - 1].X,
-                        points[j - 1].Y - points[i - 1].Y, -100);
+                        points[j - 1].Y - points[i - 1].Y, -101);
                     float phi;
                     phi = Mathf.Atan2(v1.y, v1.x);
                     
                     GameObject go1 = GameObject.Instantiate(arrow, new Vector3(
-                        points[j - 1].X, points[j - 1].Y, -100), 
+                        points[j - 1].X, points[j - 1].Y, -101), 
                         Quaternion.EulerAngles(0, 0, Mathf.PI + phi), tr);
                     go1.transform.localPosition = new Vector3(
-                        points[j - 1].X, points[j - 1].Y, -100);
+                        points[j - 1].X, points[j - 1].Y, -101);
                 }
             }
         }
@@ -85,14 +92,81 @@ public class GraphPanelLogic : MonoBehaviour
         {
             GameObject go = GameObject.Instantiate(vertex,
                 new Vector3(points[j-1].X, points[j-1].Y, -100), Quaternion.identity, tr);
-            go.transform.localPosition = new Vector3(points[j - 1].X, points[j - 1].Y, -100);
-            go.transform.localScale = new Vector3(10, 10, -100);
+            go.transform.localPosition = new Vector3(points[j - 1].X, points[j - 1].Y, -101);
+            go.transform.localScale = new Vector3(10, 10, -101);
 
             GameObject txt = GameObject.Instantiate(vertexInfo, new Vector3(points[j - 1].X, 
                 points[j - 1].Y, -103), Quaternion.identity, tr);
             txt.transform.localPosition = new Vector3(points[j - 1].X, points[j -1].Y, -103);
             txt.GetComponent<Text>().text = j.ToString();
             
+        }
+    }
+
+    private void createGraph()
+    {
+        switch (graphType)
+        {
+            case GraphTypes.Random:
+                {
+                    graph = GraphGenerator.generateRandom(r.Next(1, maxVertex + 1));
+                    break;
+                }
+            case GraphTypes.RandomDirected:
+                {
+                    graph = GraphGenerator.generateRandomDirected(r.Next(1, maxVertex + 1));
+                    break;
+                }
+            case GraphTypes.Tree:
+                {
+                    graph = GraphGenerator.generateTree(r.Next(1, maxVertex + 1));
+                    break;
+                }
+            case GraphTypes.Bipartite:
+                {
+                    graph = GraphGenerator.generateBipartite();
+                    break;
+                }
+            case GraphTypes.Multi:
+                {
+                    graph = GraphGenerator.generateMulti();
+                    break;
+                }
+            case GraphTypes.Regular:
+                {
+                    graph = GraphGenerator.generateRegular(r.Next(1, maxVertex + 1), r.Next(0, maxVertex));
+                    break;
+                }
+            case GraphTypes.Arborescence:
+                {
+                    graph = GraphGenerator.generateArborescence();
+                    break;
+                }
+            case GraphTypes.Tournment:
+                {
+                    graph = GraphGenerator.generateTournment(r.Next(1, maxVertex + 1));
+                    break;
+                }
+            case GraphTypes.Empty:
+                {
+                    graph = GraphGenerator.generateEmpty(r.Next(1, maxVertex + 1));
+                    break;
+                }
+            case GraphTypes.Complete:
+                {
+                    graph = GraphGenerator.generateComplete(r.Next(1, maxVertex + 1));
+                    break;
+                }
+            case GraphTypes.Network:
+                {
+                    graph = GraphGenerator.generateNetwork();
+                    break;
+                }
+            case GraphTypes.DAG:
+                {
+                    graph = GraphGenerator.generateDAG();
+                    break;
+                }
         }
     }
 

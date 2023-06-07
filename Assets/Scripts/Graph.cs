@@ -64,6 +64,19 @@ public class Graph
         }
     }
 
+    public int E
+    {
+        get
+        {
+            int e = 0;
+            foreach(int k in this.adjacencyList.Keys)
+            {
+                e += adjacencyList[k].Count;
+            }
+            return e;
+        }
+    }
+
     public Dictionary<int, List<int>> AdjacencyList
     {
         get { return adjacencyList; }
