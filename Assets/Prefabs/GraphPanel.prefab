@@ -79,7 +79,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6056df9ce1c60f448b62217fcd1c4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minVertex: 0
+  maxVertex: 0
+  graphType: 0
+  isWeighted: 0
   edge: {fileID: 8253732200448693810, guid: b7fc19774581d124bb94827cc8742a2e, type: 3}
   arrow: {fileID: 6683483803563765103, guid: 50df7c82584d6354a9cb1d538209c6c5, type: 3}
   vertex: {fileID: 2289237016269573273, guid: fb6ec2c3b9174054d9ac5b82b2508f79, type: 3}
+  vertexInfo: {fileID: 7561271344870044717, guid: 8b4f6de5da6e6dd4fae23479ff0f24f1, type: 3}
+  weightInfo: {fileID: 2619941119529185956, guid: 7ab8e6ae2311d544ea86b75194668d18, type: 3}
   tr: {fileID: 8853735407646324223}
+  eps: 0.001
+  l: 10
+  delta: 0.999
+  cRep: 1.5
+  cSpr: 1
+  k: 10000

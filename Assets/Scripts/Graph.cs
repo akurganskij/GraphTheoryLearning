@@ -18,6 +18,7 @@ public class Graph
     {
 
         adjacencyList = new Dictionary<int, List<int>>();
+        weghts = new Dictionary<KeyValuePair<int, int>, int>();
         this.isOriented = isOriented;
         this.isWeighted = isWeighted;
     }
@@ -43,6 +44,7 @@ public class Graph
 
     public void AddEdge(int u, int v, int w)
     {
+        if(weghts == null) weghts = new Dictionary<KeyValuePair<int, int>, int>();
         if (!adjacencyList.ContainsKey(u))
         {
             adjacencyList.Add(u, new List<int>());
@@ -60,6 +62,8 @@ public class Graph
         if (isWeighted)
         {
             weghts.Add(new KeyValuePair<int, int>(u, v), w);
+            if(!isOriented)
+                weghts.Add(new KeyValuePair<int, int>(v, u), w);
         }
     }
 

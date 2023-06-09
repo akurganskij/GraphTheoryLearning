@@ -15,6 +15,7 @@ public class GraphPanelLogic : IntEventInvoker
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject vertex;
     [SerializeField] GameObject vertexInfo;
+    [SerializeField] GameObject weightInfo;
     [SerializeField] Transform tr;
     [SerializeField] float eps = 0.001f;
     [SerializeField] float l = 10.0f;
@@ -75,9 +76,11 @@ public class GraphPanelLogic : IntEventInvoker
                 GameObject go = GameObject.Instantiate(edge, tr);
                 go.GetComponent<LineRenderer>().SetPositions(new Vector3[]
                 {
-                    new Vector3(points[i-1].X, points[i-1].Y, -100),
-                    new Vector3(points[j-1].X, points[j-1].Y, -100)
+                    new Vector3(points[i-1].X, points[i-1].Y, 0),
+                    new Vector3(points[j-1].X, points[j-1].Y, 0),
                 });
+                go.transform.localPosition = new Vector3(0, 0, 0);
+                go.transform.parent = tr;
                 if (graph.IsOriented)
                 {
                     Vector3 v1 = new Vector3(points[j - 1].X - points[i - 1].X,
@@ -86,23 +89,35 @@ public class GraphPanelLogic : IntEventInvoker
                     phi = Mathf.Atan2(v1.y, v1.x);
                     
                     GameObject go1 = GameObject.Instantiate(arrow, new Vector3(
-                        points[j - 1].X, points[j - 1].Y, -101), 
+                        points[j - 1].X, points[j - 1].Y, -2), 
                         Quaternion.EulerAngles(0, 0, Mathf.PI + phi), tr);
                     go1.transform.localPosition = new Vector3(
-                        points[j - 1].X, points[j - 1].Y, -101);
+                        points[j - 1].X, points[j - 1].Y, -2);
+                    go1.transform.parent = tr;
+                }
+                if (graph.IsWeighted)
+                {
+                    Vector3 cord = new Vector3(
+                        (points[j - 1].X + points[i - 1].X) / 2,
+                        (points[j - 1].Y + points[i - 1].Y) / 2,
+                        -99
+                    );
+                    GameObject go2 = GameObject.Instantiate(weightInfo, cord, Quaternion.identity, tr);
+                    go2.transform.localPosition = cord;
+                    go2.GetComponentInChildren<Text>().text = graph.getWeightsforEdge(i, j).ToString();
                 }
             }
         }
         foreach (int j in graph.AdjacencyList.Keys)
         {
             GameObject go = GameObject.Instantiate(vertex,
-                new Vector3(points[j-1].X, points[j-1].Y, -101), Quaternion.identity, tr);
-            go.transform.localPosition = new Vector3(points[j - 1].X, points[j - 1].Y, -101);
-            go.transform.localScale = new Vector3(10, 10, -101);
+                new Vector3(points[j-1].X, points[j-1].Y, -1), Quaternion.identity, tr);
+            go.transform.localPosition = new Vector3(points[j - 1].X, points[j - 1].Y, -1);
+            go.transform.localScale = new Vector3(10, 10, -1);
 
             GameObject txt = GameObject.Instantiate(vertexInfo, new Vector3(points[j - 1].X, 
-                points[j - 1].Y, -103), Quaternion.identity, tr);
-            txt.transform.localPosition = new Vector3(points[j - 1].X, points[j -1].Y, -103);
+                points[j - 1].Y, -10), Quaternion.identity, tr);
+            txt.transform.localPosition = new Vector3(points[j - 1].X, points[j -1].Y, -10);
             txt.GetComponent<Text>().text = j.ToString();
             
         }

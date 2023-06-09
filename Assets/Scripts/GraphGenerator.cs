@@ -15,7 +15,14 @@ public static class GraphGenerator
             {
                 int v = r.Next(1, g.V + 1);
                 if (v != i && !g.AdjacencyList[i].Contains(v))
-                    g.AddEdge(i, v);
+                    if (isWeighted)
+                    {
+                        g.AddEdge(i, v, r.Next(1, 100));
+                    }
+                    else
+                    { 
+                        g.AddEdge(i, v); 
+                    }
             }
         }
         return g;
@@ -31,7 +38,14 @@ public static class GraphGenerator
             {
                 int v = r.Next(1, g.V + 1);
                 if (v != i && !g.AdjacencyList[i].Contains(v) && !g.AdjacencyList[v].Contains(i))
-                    g.AddEdge(i, v);
+                    if (isWeighted)
+                    {
+                        g.AddEdge(i, v, r.Next(1, 100));
+                    }
+                    else
+                    {
+                        g.AddEdge(i, v);
+                    }
             }
         }
         return g;
@@ -62,12 +76,26 @@ public static class GraphGenerator
                     node = 1;
                 }
             }
-            g.AddEdge(node, code[0]);
+            if (isWeighted)
+            {
+                g.AddEdge(node, code[0], r.Next(1, 100));
+            }
+            else
+            {
+                g.AddEdge(node, code[0]);
+            }
             code.RemoveAt(0);
             v.Remove(node);
         }
         if(v.Count == 2)
-            g.AddEdge(v[0], v[1]);
+            if (isWeighted)
+            {
+                g.AddEdge(v[0], v[1], r.Next(1, 100));
+            }
+            else
+            {
+                g.AddEdge(v[0], v[1]);
+            }
         return g;
     }
     public static Graph generateBipartite(int n, bool isWeighted)
@@ -86,7 +114,14 @@ public static class GraphGenerator
             for (int j = 0; j <= r.Next(0, 2 * g.V); j++)
             {
                 int v = r.Next(1, g.V + 1);
-                g.AddEdge(i, v);
+                if (isWeighted)
+                {
+                    g.AddEdge(i, v, r.Next(1, 100));
+                }
+                else
+                {
+                    g.AddEdge(i, v);
+                }
             }
         }
         return g;
@@ -106,7 +141,14 @@ public static class GraphGenerator
             {
                 int v = r.Next(1, g.V + 1);
                 if (v != i && !g.AdjacencyList[i].Contains(v) && g.AdjacentVertex(v).Count < deg) {
-                    g.AddEdge(i, v);
+                    if (isWeighted)
+                    {
+                        g.AddEdge(i, v, r.Next(1, 100));
+                    }
+                    else
+                    {
+                        g.AddEdge(i, v);
+                    }
                     e++;
                 }
                 t = deg;
@@ -143,9 +185,23 @@ public static class GraphGenerator
             for (int j = i + 1; j <= n; j++)
             {
                 if(r.Next(0, 2) % 2 == 1)
-                    g.AddEdge(i, j);
+                    if (isWeighted)
+                    {
+                        g.AddEdge(i, j, r.Next(1, 100));
+                    }
+                    else
+                    {
+                        g.AddEdge(i, j);
+                    }
                 else
+                    if (isWeighted)
+                {
+                    g.AddEdge(j, i, r.Next(1, 100));
+                }
+                else
+                {
                     g.AddEdge(j, i);
+                }
             }
         }
         return g;
@@ -159,12 +215,20 @@ public static class GraphGenerator
     public static Graph generateComplete(int n, bool isWeighted)
     {
         Graph g = new Graph(false, isWeighted);
+        System.Random r = new System.Random();
         g.V = n;
         for(int i = 1; i <= n; i++)
         {
             for(int j = i + 1; j <= n; j++)
             {
-                g.AddEdge(i, j);
+                if (isWeighted)
+                {
+                    g.AddEdge(i, j, r.Next(1, 100));
+                }
+                else
+                {
+                    g.AddEdge(i, j);
+                }
             }
         }
         return g;
@@ -181,4 +245,5 @@ public static class GraphGenerator
 
         return g;
     }
+
 }
