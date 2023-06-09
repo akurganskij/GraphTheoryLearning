@@ -12,8 +12,8 @@ public class MainMenuDataLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<string> list = CSVReader.ReadCSV("LevelNames.csv", 9);
-        List<string> amountOfStages = CSVReader.ReadCSV("LevelStagesInfo.csv", 9);
+        List<string> list = CSVProcessor.ReadCSV("LevelNames.csv", 9);
+        List<string> amountOfStages = CSVProcessor.ReadCSV("LevelStagesInfo.csv", 9);
         GetLevelsHeadings();
         for (int i = 0; i < levelNames.Count; i++)
         {

@@ -665,8 +665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a60ab7717ea91d40a5b00ecb96d0889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelNumber: 5
   amount: 4
   fileName: Level5StagesNames.csv
+  fileInfoName: Level5StagesInfo.csv
 --- !u!81 &1132391864
 AudioListener:
   m_ObjectHideFlags: 0

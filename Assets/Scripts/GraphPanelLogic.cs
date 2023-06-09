@@ -4,10 +4,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GraphPanelLogic : MonoBehaviour
+public class GraphPanelLogic : IntEventInvoker
 {
+    [SerializeField] int minVertex;
     [SerializeField] int maxVertex;
     [SerializeField] GraphTypes graphType;
+    [SerializeField] bool isWeighted;
 
     [SerializeField] GameObject edge;
     [SerializeField] GameObject arrow;
@@ -36,6 +38,8 @@ public class GraphPanelLogic : MonoBehaviour
 
     private void Start()
     {
+        unityEvents.Add(EventName.GraphChangedEvent, new GraphChangedEvent());
+        EventManager.AddInvoker(EventName.GraphChangedEvent, this);
         HandleNewGraphButtonClickEvent();
     }
 
@@ -43,6 +47,7 @@ public class GraphPanelLogic : MonoBehaviour
     {
         Awake();
         createGraph();
+        unityEvents[EventName.GraphChangedEvent].Invoke(0);
         points.Clear();
         GraphBuilder graphBuilder = new GraphBuilder(graph, 0, 100);
         points = graphBuilder.evaluatePoints(eps, k, l, delta, cRep, cSpr);
@@ -91,7 +96,7 @@ public class GraphPanelLogic : MonoBehaviour
         foreach (int j in graph.AdjacencyList.Keys)
         {
             GameObject go = GameObject.Instantiate(vertex,
-                new Vector3(points[j-1].X, points[j-1].Y, -100), Quaternion.identity, tr);
+                new Vector3(points[j-1].X, points[j-1].Y, -101), Quaternion.identity, tr);
             go.transform.localPosition = new Vector3(points[j - 1].X, points[j - 1].Y, -101);
             go.transform.localScale = new Vector3(10, 10, -101);
 
@@ -109,62 +114,65 @@ public class GraphPanelLogic : MonoBehaviour
         {
             case GraphTypes.Random:
                 {
-                    graph = GraphGenerator.generateRandom(r.Next(1, maxVertex + 1));
+                    graph = GraphGenerator.generateRandom(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.RandomDirected:
                 {
-                    graph = GraphGenerator.generateRandomDirected(r.Next(1, maxVertex + 1));
+                    graph = GraphGenerator.generateRandomDirected(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.Tree:
                 {
-                    graph = GraphGenerator.generateTree(r.Next(1, maxVertex + 1));
+                    graph = GraphGenerator.generateTree(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.Bipartite:
                 {
-                    graph = GraphGenerator.generateBipartite();
+                    graph = GraphGenerator.generateBipartite(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.Multi:
                 {
-                    graph = GraphGenerator.generateMulti();
+                    graph = GraphGenerator.generateMulti(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.Regular:
                 {
-                    graph = GraphGenerator.generateRegular(r.Next(1, maxVertex + 1), r.Next(0, maxVertex));
+                    int k = 0;
+                    graph = null;
+                    while((graph == null || graph.E == 0) && k < 4)
+                        graph = GraphGenerator.generateRegular(r.Next(minVertex, maxVertex + 1), r.Next(0, maxVertex - 1), isWeighted);
                     break;
                 }
             case GraphTypes.Arborescence:
                 {
-                    graph = GraphGenerator.generateArborescence();
+                    graph = GraphGenerator.generateArborescence(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.Tournment:
                 {
-                    graph = GraphGenerator.generateTournment(r.Next(1, maxVertex + 1));
+                    graph = GraphGenerator.generateTournment(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.Empty:
                 {
-                    graph = GraphGenerator.generateEmpty(r.Next(1, maxVertex + 1));
+                    graph = GraphGenerator.generateEmpty(r.Next(minVertex, maxVertex + 1));
                     break;
                 }
             case GraphTypes.Complete:
                 {
-                    graph = GraphGenerator.generateComplete(r.Next(1, maxVertex + 1));
+                    graph = GraphGenerator.generateComplete(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.Network:
                 {
-                    graph = GraphGenerator.generateNetwork();
+                    graph = GraphGenerator.generateNetwork(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
             case GraphTypes.DAG:
                 {
-                    graph = GraphGenerator.generateDAG();
+                    graph = GraphGenerator.generateDAG(r.Next(minVertex, maxVertex + 1), isWeighted);
                     break;
                 }
         }

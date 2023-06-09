@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class GraphGenerator
 {
-    public static Graph generateRandom(int n)
+    public static Graph generateRandom(int n, bool isWeighted)
     {
-        Graph g = new Graph(false);
+        Graph g = new Graph(false, isWeighted);
         System.Random r = new System.Random();
         g.V = n;
         for (int i = 1; i <= g.V; i++)
@@ -20,9 +20,9 @@ public static class GraphGenerator
         }
         return g;
     }
-    public static Graph generateRandomDirected(int n)
+    public static Graph generateRandomDirected(int n, bool isWeighted)
     {
-        Graph g = new Graph(true);
+        Graph g = new Graph(true, isWeighted);
         System.Random r = new System.Random();
         g.V = n;
         for (int i = 1; i <= g.V; i++)
@@ -36,30 +36,67 @@ public static class GraphGenerator
         }
         return g;
     }
-    public static Graph generateTree(int n)
+    public static Graph generateTree(int n, bool isWeighted)
     {
-        Graph g = new Graph(false);
+        Graph g = new Graph(false, isWeighted);
+        System.Random r = new System.Random();
+        List<int> code = new List<int>();
+        List<int> v = new List<int>();
+        g.V = n;
+        for (int i = 0; i < n - 2; i++)
+        {
+            code.Add(r.Next(1, g.V + 1));
+        }
+        for (int i = 0; i < g.V; i++)
+        {
+            v.Add(i+1);
+        }
+        int node = 1;
+        while(code.Count != 0)
+        {
+            while (code.Contains(node) || !v.Contains(node))
+            {
+                node++;
+                if (node > g.V)
+                {
+                    node = 1;
+                }
+            }
+            g.AddEdge(node, code[0]);
+            code.RemoveAt(0);
+            v.Remove(node);
+        }
+        if(v.Count == 2)
+            g.AddEdge(v[0], v[1]);
+        return g;
+    }
+    public static Graph generateBipartite(int n, bool isWeighted)
+    {
+        Graph g = new Graph(false, isWeighted);
 
         return g;
     }
-    public static Graph generateBipartite()
+    public static Graph generateMulti(int n, bool isWeighted)
     {
-        Graph g = new Graph(false);
-
+        Graph g = new Graph(false, isWeighted);
+        System.Random r = new System.Random();
+        g.V = n;
+        for (int i = 1; i <= g.V; i++)
+        {
+            for (int j = 0; j <= r.Next(0, 2 * g.V); j++)
+            {
+                int v = r.Next(1, g.V + 1);
+                g.AddEdge(i, v);
+            }
+        }
         return g;
     }
-    public static Graph generateMulti()
-    {
-        Graph g = new Graph(false);
-
-        return g;
-    }
-    public static Graph generateRegular(int n, int deg)
+    public static Graph generateRegular(int n, int deg, bool isWeighted)
     {
         if(deg >= n) deg = n - 1;
-        if (deg == n - 1) return generateComplete(n);
+        if (deg == n - 1) return generateComplete(n, isWeighted);
         if (deg % 2 == 1 && n % 2 == 1) deg--;
-        Graph g = new Graph(false);
+        Graph g = new Graph(false, isWeighted);
         System.Random r = new System.Random();
         g.V = n;
         int e = 0, t = deg;
@@ -90,15 +127,15 @@ public static class GraphGenerator
         }
         return g;
     }
-    public static Graph generateArborescence()
+    public static Graph generateArborescence(int n, bool isWeighted)
     {
-        Graph g = new Graph(true);
+        Graph g = new Graph(true, isWeighted);
 
         return g;
     }
-    public static Graph generateTournment(int n)
+    public static Graph generateTournment(int n, bool isWeighted)
     {
-        Graph g = new Graph(true);
+        Graph g = new Graph(true, isWeighted);
         System.Random r = new System.Random();
         g.V = n;
         for (int i = 1; i <= n; i++)
@@ -119,9 +156,9 @@ public static class GraphGenerator
         g.V = n;
         return g;
     }
-    public static Graph generateComplete(int n)
+    public static Graph generateComplete(int n, bool isWeighted)
     {
-        Graph g = new Graph(false);
+        Graph g = new Graph(false, isWeighted);
         g.V = n;
         for(int i = 1; i <= n; i++)
         {
@@ -132,15 +169,15 @@ public static class GraphGenerator
         }
         return g;
     }
-    public static Graph generateNetwork()
+    public static Graph generateNetwork(int n, bool isWeighted)
     {
-        Graph g = new Graph(false);
+        Graph g = new Graph(true, isWeighted);
 
         return g;
     }
-    public static Graph generateDAG()
+    public static Graph generateDAG(int n, bool isWeighted)
     {
-        Graph g = new Graph(true);
+        Graph g = new Graph(true, isWeighted);
 
         return g;
     }

@@ -10,6 +10,8 @@ TagManager:
   - LevelInfo
   - VertexNum
   - AdjList
+  - Destroy
+  - Percentage
   layers:
   - Default
   - TransparentFX

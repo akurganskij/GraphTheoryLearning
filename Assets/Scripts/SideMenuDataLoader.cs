@@ -11,7 +11,7 @@ public class SideMenuDataLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<string> list = CSVReader.ReadCSV("SideMenuOptions.csv", 4);
+        List<string> list = CSVProcessor.ReadCSV("SideMenuOptions.csv", 4);
         GetButtonTexts();
         for (int i = 0; i < buttonTexts.Count; i++)
         {

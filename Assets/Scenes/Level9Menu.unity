@@ -647,8 +647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a60ab7717ea91d40a5b00ecb96d0889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelNumber: 9
   amount: 3
   fileName: Level9StagesNames.csv
+  fileInfoName: Level9StagesInfo.csv
 --- !u!114 &866763944
 MonoBehaviour:
   m_ObjectHideFlags: 0

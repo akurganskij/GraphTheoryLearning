@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        EventManager.Initialize();
+    }
+
     public void HandleLevelOpenButtonClickEvent(int level)
     {
         MenuNames menuNames = MenuNames.Level1Menu;

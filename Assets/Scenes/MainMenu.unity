@@ -537,6 +537,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: LevelHeading
       objectReference: {fileID: 0}
+    - target: {fileID: 4303868733633993354, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
+      propertyPath: m_TagString
+      value: Percentage
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
 --- !u!224 &319042442 stripped
@@ -696,7 +700,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: -20, y: 1457.72}
+  m_SizeDelta: {x: -20, y: 1546.28}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &871691091
 PrefabInstance:
@@ -1771,13 +1775,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 688499348}
     m_Modifications:
     - target: {fileID: 4303868732047955574, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
-      propertyPath: m_AnchoredPosition.x
+      propertyPath: m_SizeDelta.x
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303868732047955574, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4303868732372265617, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 89fa1f57413e83a48911ce7238bdc784, type: 3}
+    - target: {fileID: 4303868732412886350, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4303868732412886350, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1785,6 +1797,10 @@ PrefabInstance:
     - target: {fileID: 4303868732418767739, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
       propertyPath: m_TagString
       value: LevelInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303868732777099162, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
+      propertyPath: m_Value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4303868732777099173, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1917,6 +1933,10 @@ PrefabInstance:
     - target: {fileID: 4303868733176521049, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
       propertyPath: m_TagString
       value: LevelHeading
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303868733633993354, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
+      propertyPath: m_TagString
+      value: Percentage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4254b00bb1e22e3498264ab893c9621b, type: 3}
@@ -2215,7 +2235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 573085518236336053, guid: ca4788f9fbd233b4194ff0a47c989c36, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 573085518236336053, guid: ca4788f9fbd233b4194ff0a47c989c36, type: 3}
       propertyPath: m_AnchorMax.x

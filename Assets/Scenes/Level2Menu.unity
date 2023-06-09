@@ -1390,8 +1390,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a60ab7717ea91d40a5b00ecb96d0889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelNumber: 2
   amount: 9
   fileName: Level2StagesNames.csv
+  fileInfoName: Level2StagesInfo.csv
 --- !u!1001 &1895286274
 PrefabInstance:
   m_ObjectHideFlags: 0

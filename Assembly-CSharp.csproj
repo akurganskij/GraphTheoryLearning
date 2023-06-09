@@ -75,9 +75,11 @@
     <Compile Include="Assets\Scripts\Point.cs" />
     <Compile Include="Assets\Scripts\Events\EventName.cs" />
     <Compile Include="Assets\Scripts\SideMenuDataLoader.cs" />
-    <Compile Include="Assets\Scripts\CSVReader.cs" />
+    <Compile Include="Assets\Scripts\CSVProcessor.cs" />
     <Compile Include="Assets\Scripts\GraphPanelLogic.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Events\GraphChangedEvent.cs" />
+    <Compile Include="Assets\Scripts\Results.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

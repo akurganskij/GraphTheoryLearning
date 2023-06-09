@@ -5,11 +5,21 @@ using UnityEngine;
 public class Graph
 {
     Dictionary<int, List<int>> adjacencyList;
-    bool isOriented;
+    Dictionary<KeyValuePair<int, int>, int> weghts;
+    bool isOriented, isWeighted;
     public Graph(bool isOriented)
     {
         adjacencyList = new Dictionary<int, List<int>>();
         this.isOriented = isOriented;
+        this.isWeighted = false;
+    }
+
+    public Graph(bool isOriented, bool isWeighted)
+    {
+
+        adjacencyList = new Dictionary<int, List<int>>();
+        this.isOriented = isOriented;
+        this.isWeighted = isWeighted;
     }
 
 
@@ -28,6 +38,28 @@ public class Graph
                 adjacencyList.Add(v, new List<int>());
             }
             adjacencyList[v].Add(u);
+        }
+    }
+
+    public void AddEdge(int u, int v, int w)
+    {
+        if (!adjacencyList.ContainsKey(u))
+        {
+            adjacencyList.Add(u, new List<int>());
+        }
+        adjacencyList[u].Add(v);
+
+        if (!isOriented)
+        {
+            if (!adjacencyList.ContainsKey(v))
+            {
+                adjacencyList.Add(v, new List<int>());
+            }
+            adjacencyList[v].Add(u);
+        }
+        if (isWeighted)
+        {
+            weghts.Add(new KeyValuePair<int, int>(u, v), w);
         }
     }
 
@@ -58,7 +90,8 @@ public class Graph
     public int V
     {
         get { return adjacencyList.Count; }
-        set { for(int i = 1; i <= value; i++) {
+        set { 
+            for(int i = 1; i <= value; i++) {
                 adjacencyList.Add(i, new List<int>());
             } 
         }
@@ -73,8 +106,21 @@ public class Graph
             {
                 e += adjacencyList[k].Count;
             }
-            return e;
+            return e / 2;
         }
+    }
+    public Dictionary<KeyValuePair<int, int>, int> Weights
+    {
+        get { return weghts; }
+    }
+
+    public int getWeightsforEdge(int u, int v)
+    {
+        if(weghts.ContainsKey(new KeyValuePair<int, int>(u, v)))
+        {
+            return weghts[new KeyValuePair<int, int>(u, v)];
+        }
+        return int.MaxValue;
     }
 
     public Dictionary<int, List<int>> AdjacencyList
@@ -95,4 +141,17 @@ public class Graph
         get { return isOriented; }
     }
 
+    public bool IsWeighted
+    {
+        get { return isWeighted; }
+    }
+
+    public int deg(int u)
+    {
+        if (adjacencyList.ContainsKey(u))
+        {
+            return adjacencyList[u].Count;
+        }
+        return -1;
+    }
 }
