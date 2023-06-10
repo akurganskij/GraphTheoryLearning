@@ -41,10 +41,11 @@ public class GraphPanelLogic : IntEventInvoker
     {
         unityEvents.Add(EventName.GraphChangedEvent, new GraphChangedEvent());
         EventManager.AddInvoker(EventName.GraphChangedEvent, this);
+        EventManager.AddListener(EventName.ReloadGraph, HandleNewGraphButtonClickEvent);
         HandleNewGraphButtonClickEvent();
     }
 
-    public void HandleNewGraphButtonClickEvent()
+    public void HandleNewGraphButtonClickEvent(int a = 0)
     {
         Awake();
         createGraph();

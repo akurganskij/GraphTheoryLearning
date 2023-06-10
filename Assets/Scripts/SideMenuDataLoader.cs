@@ -11,7 +11,7 @@ public class SideMenuDataLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<string> list = CSVProcessor.ReadCSV("SideMenuOptions.csv", 4);
+        List<string> list = CSVProcessor.ReadCSV("SideMenuOptions.csv", 5);
         GetButtonTexts();
         for (int i = 0; i < buttonTexts.Count; i++)
         {
@@ -26,7 +26,7 @@ public class SideMenuDataLoader : MonoBehaviour
 
     void GetButtonTexts()
     {
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 5; ++i)
         {
             foreach (Text text in GameObject.Find("Button" + i).GetComponentsInChildren<Text>())
             {

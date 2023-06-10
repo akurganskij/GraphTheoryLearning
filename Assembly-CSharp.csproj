@@ -54,10 +54,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ScreenPreferences.cs" />
+    <Compile Include="Assets\Scripts\ClearProgressLogic.cs" />
     <Compile Include="Assets\Scripts\Level1Menu.cs" />
+    <Compile Include="Assets\Scripts\Events\GraphChangedEvent.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Menu\LevelMenu.cs" />
     <Compile Include="Assets\Scripts\MainMenuDataLoader.cs" />
+    <Compile Include="Assets\Scripts\Results.cs" />
     <Compile Include="Assets\Scripts\GraphFromAdjListLoader.cs" />
     <Compile Include="Assets\Scripts\Menu\SideMenu.cs" />
     <Compile Include="Assets\Scripts\LevelDataLoader.cs" />
@@ -70,16 +73,16 @@
     <Compile Include="Assets\Scripts\Menu\MenuNames.cs" />
     <Compile Include="Assets\Scripts\Vector.cs" />
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Events\ReloadGraphEvent.cs" />
     <Compile Include="Assets\Scripts\GraphBuilder.cs" />
     <Compile Include="Assets\Scripts\Events\IntEventInvoker.cs" />
     <Compile Include="Assets\Scripts\Point.cs" />
+    <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\Events\EventName.cs" />
     <Compile Include="Assets\Scripts\SideMenuDataLoader.cs" />
     <Compile Include="Assets\Scripts\CSVProcessor.cs" />
     <Compile Include="Assets\Scripts\GraphPanelLogic.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Events\GraphChangedEvent.cs" />
-    <Compile Include="Assets\Scripts\Results.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

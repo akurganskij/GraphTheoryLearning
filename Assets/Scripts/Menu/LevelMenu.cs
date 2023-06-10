@@ -6,12 +6,9 @@ public class LevelMenu : MonoBehaviour
 {
     void Update()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                MenuManager.GoToMenu(MenuNames.MainMenu);
-            }
+            MenuManager.GoToMenu(MenuNames.MainMenu);
         }
     }
 }

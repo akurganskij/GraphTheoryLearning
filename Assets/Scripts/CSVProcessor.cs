@@ -63,7 +63,8 @@ public static class CSVProcessor
         {
             foreach (string s in csvText.Split(','))
             {
-                list.Add(int.Parse(s));
+                if(!String.IsNullOrEmpty(s))
+                    list.Add(int.Parse(s));
             }
         }
         return list;

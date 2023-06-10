@@ -158,4 +158,13 @@ public class Graph
         }
         return -1;
     }
+
+    public bool containsEdge(int u, int v)
+    {
+        if (adjacencyList.ContainsKey(u))
+        {
+            if (adjacencyList[u].Contains(v)) return true;
+        }
+        return false;
+    }
 }

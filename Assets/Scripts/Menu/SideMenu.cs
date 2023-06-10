@@ -20,6 +20,12 @@ public class SideMenu : MonoBehaviour
 
     }
 
+    public void HandleClearProgressButtonClickEvent()
+    {
+        Destroy(gameObject);
+        Object.Instantiate(Resources.Load("ClearConfirmDialog"), GameObject.Find("Canvas").GetComponent<Transform>());
+    }
+
     public void HandleDrawGraphButtonClickEvent()
     {
         SceneManager.LoadScene("GraphFromAdjList");

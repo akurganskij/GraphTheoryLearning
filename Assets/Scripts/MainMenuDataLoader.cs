@@ -8,6 +8,8 @@ public class MainMenuDataLoader : MonoBehaviour
     List<Text> levelNames = new List<Text>();
     List<Text> levelDescriptions = new List<Text>();
 
+    List<Text> levelPercentage = new List<Text>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,12 @@ public class MainMenuDataLoader : MonoBehaviour
             {
                 description.text = amountOfStages[i];
             }
+            if(PlayerPrefs.HasKey("Level" + (i+1) + "Percentage"))
+            {
+                float percentage = PlayerPrefs.GetFloat("Level" + (i + 1) + "Percentage");
+                GameObject.Find("LevelButton" + i).GetComponentInChildren<Slider>().value = percentage;
+                levelPercentage[i].text = "" + (int)(percentage * 100) + "%";
+            }
         }
         
     }
@@ -38,7 +46,9 @@ public class MainMenuDataLoader : MonoBehaviour
             foreach (Text text in GameObject.Find("LevelButton" + i).GetComponentsInChildren<Text>())
             {
                 if (text.tag == "LevelHeading") levelNames.Add(text);
-                if (text.tag == "LevelInfo") levelDescriptions.Add(text);
+                else if (text.tag == "LevelInfo") levelDescriptions.Add(text);
+                else levelPercentage.Add(text);
+
             }
         }
     }

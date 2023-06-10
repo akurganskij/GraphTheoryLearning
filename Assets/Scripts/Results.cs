@@ -14,9 +14,12 @@ public static class Results
         if (!levelInfoLoaded)
         {
             var t = CSVProcessor.ReadCSV("AmountToComplete.csv", 9);
-            foreach(string s in t)
+            foreach (string s in t)
             {
-                stagesAmount.Add(int.Parse(s));
+                int temp;
+                if (int.TryParse(s, out temp))
+                    stagesAmount.Add(temp);
+
             }
             levelInfoLoaded = true;
         }
@@ -29,7 +32,9 @@ public static class Results
             {
                 foreach (string s in p.Split(','))
                 {
-                    list.Add(int.Parse(s));
+                    int temp;
+                    if(int.TryParse(s, out temp))
+                        list.Add(temp);
                 }
                 results.Add(new KeyValuePair<int, int>(level, stage), list);
             }
@@ -39,7 +44,7 @@ public static class Results
         if (!dataLoaded)
         {
             int k = 0;
-            var t = CSVProcessor.ReadCSV("AmountToCompleteInStage.csv", 50);
+            var t = CSVProcessor.ReadCSV("AmountToCompleteInStage.csv", 51);
             for (int i = 0; i < stagesAmount.Count; i++)
             {
                 for (int j = 0; j < stagesAmount[i]; j++)
@@ -49,8 +54,12 @@ public static class Results
                     {
                         foreach (string s in t[k].Split(','))
                         {
-                            if (string.IsNullOrEmpty(s)) list.Add(0);
-                            else list.Add(int.Parse(s));
+                            int temp;
+                            if (int.TryParse(s, out temp))
+                            {
+                                list.Add(temp);
+                            }
+                            else list.Add(0);
                         }
                         maximumNeeded.Add(new KeyValuePair<int, int>(i + 1, j + 1), list);
                     }
@@ -75,8 +84,6 @@ public static class Results
     public static void appendResults(int level, int stage, int taskNum)
     {
         if(!dataLoaded)loadResults(level, stage);
-        var t1 = results;
-        var t2 = maximumNeeded;
         if (results.ContainsKey(new KeyValuePair<int, int>(level, stage)))
         {
             int qurrent = results[new KeyValuePair<int, int>(level, stage)][taskNum - 1];
@@ -88,8 +95,8 @@ public static class Results
         }
         else
         {
-            var temp = maximumNeeded[new KeyValuePair<int, int>(level, stage)];
-            for (int i = 0; i < temp.Count; i++) temp[i] = 0;
+            List<int> temp = new List<int>();
+            for (int i = 0; i < maximumNeeded[new KeyValuePair<int, int>(level, stage)].Count; i++) temp.Add(0);
             temp[taskNum - 1]++;
             results[new KeyValuePair<int, int>(level, stage)] = temp;
         }
@@ -102,5 +109,15 @@ public static class Results
         List<int> amount = new List<int>();
         maximumNeeded.TryGetValue(new KeyValuePair<int, int>(level, stage), out amount);
         return amount;
+    }
+
+    public static void clear()
+    {
+        stagesAmount.Clear();
+        results.Clear();
+        maximumNeeded.Clear();
+        isLoaded = false; 
+        dataLoaded = false; 
+        levelInfoLoaded = false;
     }
 }
