@@ -13,6 +13,7 @@ public enum MenuNames
     Level4Menu,
     Level5Menu,
     Level6Menu,
+    Level6Stage3,
     Level7Menu,
     Level8Menu,
     Level9Menu,

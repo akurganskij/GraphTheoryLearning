@@ -18,6 +18,7 @@ public class SideMenu : MonoBehaviour
     public void HandleStandingsMenuButtonClickEvent()
     {
 
+        SceneManager.LoadScene("Results");
     }
 
     public void HandleClearProgressButtonClickEvent()
@@ -28,7 +29,7 @@ public class SideMenu : MonoBehaviour
 
     public void HandleDrawGraphButtonClickEvent()
     {
-        SceneManager.LoadScene("GraphFromAdjList");
+        SceneManager.LoadScene("GraphDrawingMenu");
     }
     public void HandleQuitButtonClickEvent()
     {

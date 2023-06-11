@@ -41,4 +41,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Results.unity
     guid: 6fb180a8a1a93a541a41a600e16a27b2
+  - enabled: 1
+    path: Assets/Scenes/GraphFromAdjList.unity
+    guid: 4b11fdba60e911b4e8c52033f644a473
+  - enabled: 1
+    path: Assets/Scenes/Level6Stage3.unity
+    guid: b8851d93a3cab9e48b1e84a8edfe16a4
+  - enabled: 1
+    path: Assets/Scenes/GraphDrawingMenu.unity
+    guid: a900e06c417212745aabc93ab85ba908
   m_configObjects: {}

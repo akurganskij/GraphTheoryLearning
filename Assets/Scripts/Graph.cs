@@ -158,6 +158,15 @@ public class Graph
         }
         return -1;
     }
+    public int indeg(int u)
+    {
+        int res = 0;
+        foreach(int i in adjacencyList.Keys)
+        {
+            if (adjacencyList[i].Contains(u)) res++;
+        }
+        return res;
+    }
 
     public bool containsEdge(int u, int v)
     {

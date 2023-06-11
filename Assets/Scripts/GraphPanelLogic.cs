@@ -183,7 +183,7 @@ public class GraphPanelLogic : IntEventInvoker
                 }
             case GraphTypes.Network:
                 {
-                    graph = GraphGenerator.generateNetwork(r.Next(minVertex, maxVertex + 1), isWeighted);
+                    graph = GraphGenerator.generateNetwork(r.Next(minVertex, maxVertex + 1));
                     break;
                 }
             case GraphTypes.DAG:

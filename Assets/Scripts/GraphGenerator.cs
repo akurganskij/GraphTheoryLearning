@@ -233,10 +233,48 @@ public static class GraphGenerator
         }
         return g;
     }
-    public static Graph generateNetwork(int n, bool isWeighted)
+    public static Graph generateNetwork(int n)
     {
-        Graph g = new Graph(true, isWeighted);
-
+        Graph g = new Graph(true, true);
+        System.Random r = new System.Random();
+        g.V = n;
+        int k = 0;
+        while(k < r.Next(1, n - 2))
+        {
+            int v = r.Next(2, g.V + 1);
+            if (v != 1 && !g.AdjacencyList[1].Contains(v) && !g.AdjacencyList[v].Contains(1))
+            {
+                g.AddEdge(1, v, r.Next(1, 100));
+                k++;
+            }
+        }
+        for (int i = 2; i < g.V; i++)
+        {
+            for (int j = 0; j <= r.Next(0, g.V); j++)
+            {
+                int v = r.Next(2, g.V + 1);
+                if (v != i && !g.AdjacencyList[i].Contains(v) && !g.AdjacencyList[v].Contains(i))
+                    g.AddEdge(i, v, r.Next(1, 100));                    
+            }
+        }
+        for(int i = 2; i <= n; ++i)
+        {
+            if(g.indeg(i) == 0)
+            {
+                int v = r.Next(1, g.V);
+                while(v == i && !g.AdjacencyList[i].Contains(v) && !g.AdjacencyList[v].Contains(i)) v = r.Next(1, g.V);
+                g.AddEdge(v, i, r.Next(1, 100));
+            }
+        }
+        for (int i = 1; i < n; ++i)
+        {
+            if (g.deg(i) == 0)
+            {
+                int v = r.Next(1, g.V);
+                while (v == i && !g.AdjacencyList[i].Contains(v) && !g.AdjacencyList[v].Contains(i)) v = r.Next(1, g.V);
+                g.AddEdge(i, v, r.Next(1, 100));
+            }
+        }
         return g;
     }
     public static Graph generateDAG(int n, bool isWeighted)

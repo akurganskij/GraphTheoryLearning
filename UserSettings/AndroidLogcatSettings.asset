@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R58N72XL6KY",
         "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 1652,
+        "processId": 24982,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -222,6 +222,12 @@
             "deviceId": "R58N72XL6KY",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 1652,
+            "exited": false
+        },
+        {
+            "deviceId": "R58N72XL6KY",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 24982,
             "exited": false
         }
     ],
