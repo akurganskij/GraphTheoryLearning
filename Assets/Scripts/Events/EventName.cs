@@ -5,5 +5,6 @@ using UnityEngine;
 public enum EventName
 {
     GraphChangedEvent,
-    ReloadGraph
+    ReloadGraph,
+    GraphAnimateStep
 }

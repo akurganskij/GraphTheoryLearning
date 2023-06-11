@@ -36,4 +36,12 @@ public class Point
         y += u.Y;
         return this;
     }
+
+    public static bool operator ==(Point a, Point b) {
+        return Mathf.Abs(a.x - b.x) < 0.2f && Mathf.Abs(a.y - b.y) < 0.2f;
+    }
+    public static bool operator !=(Point a, Point b)
+    {
+        return Mathf.Abs(a.x - b.x) > 0.2f || Mathf.Abs(a.y - b.y) > 0.2f; ;
+    }
 }

@@ -29,6 +29,8 @@ public class GraphPanelLogic : IntEventInvoker
     List<Point> points = new List<Point>();
     float minX = 5, maxX = 100, minY = 5, maxY=100;
 
+    Dictionary<KeyValuePair<int, int>, GameObject> weights = new Dictionary<KeyValuePair<int, int>, GameObject>();
+
     private void Awake()
     {
         minX = -tr.GetComponent<RectTransform>().rect.width / 2 * 0.9f;
@@ -51,6 +53,7 @@ public class GraphPanelLogic : IntEventInvoker
         createGraph();
         unityEvents[EventName.GraphChangedEvent].Invoke(0);
         points.Clear();
+        weights.Clear();
         GraphBuilder graphBuilder = new GraphBuilder(graph, 0, 100);
         points = graphBuilder.evaluatePoints(eps, k, l, delta, cRep, cSpr);
         if(graph.V > 1) scalePoints();
@@ -58,6 +61,10 @@ public class GraphPanelLogic : IntEventInvoker
         {
             points[0] = new Point((maxX + minX) / 2, (maxY + minY) / 2);
         }
+        DrawGraph();
+    }
+    private void HandleNextStepEvent(int a = 0)
+    {
         DrawGraph();
     }
 
@@ -106,6 +113,8 @@ public class GraphPanelLogic : IntEventInvoker
                     GameObject go2 = GameObject.Instantiate(weightInfo, cord, Quaternion.identity, tr);
                     go2.transform.localPosition = cord;
                     go2.GetComponentInChildren<Text>().text = graph.getWeightsforEdge(i, j).ToString();
+                    weights.Add(new KeyValuePair<int, int> (i, j), go2);
+
                 }
             }
         }
@@ -228,5 +237,82 @@ public class GraphPanelLogic : IntEventInvoker
     public Graph CurrentGraph
     {
         get { return graph; }
+    }
+
+    public void selectVertexes(List<int> verts)
+    {
+        foreach(SpriteRenderer sprite in gameObject.GetComponentsInChildren<SpriteRenderer>())
+        {
+            Vector3 cord = sprite.transform.parent.transform.localPosition;
+            Point p = new Point(cord.x, cord.y);
+            int i = int.MinValue;
+            for(int j = 0; j < points.Count; j++)
+            {
+                if(points[j] == p)
+                {
+                    i = j;
+                    break;
+                }
+            }
+            if (verts.Contains(i + 1) || verts.Contains(-i - 1))
+            {
+                sprite.color = Color.magenta;
+            }
+        }
+    }
+    public void selectEdges(List<int> verts)
+    {
+        foreach (LineRenderer edge in gameObject.GetComponentsInChildren<LineRenderer>())
+        {
+            Vector3 cord1 = edge.GetPosition(0);
+            Vector3 cord2 = edge.GetPosition(1);
+            Point p1 = new Point(cord1.x, cord1.y);
+            Point p2 = new Point(cord2.x, cord2.y);
+            int i1 = int.MinValue;
+            int i2 = int.MinValue;
+            for (int j = 0; j < points.Count; j++)
+            {
+                if (points[j] == p1)
+                {
+                    i1 = j;
+                }
+                if (points[j] == p2)
+                {
+                    i2 = j;
+                }
+            }
+            int v1i = verts.IndexOf(i1 + 1);
+            if(v1i == -1) v1i = verts.IndexOf(-i1 + -1);
+            int v2i = verts.IndexOf(i2 + 1);
+            if (v2i == -1) v2i = verts.IndexOf(-i2 + -1);
+
+            if (Mathf.Abs(v1i - v2i) == 1 && v1i != -1 && v2i != -1)
+            {
+                edge.SetColors(Color.green, Color.green);
+            }
+        }
+    }
+
+    public void clearSelection()
+    {
+        foreach (SpriteRenderer sprite in gameObject.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprite.color = Color.blue;
+        }
+        foreach (LineRenderer edge in gameObject.GetComponentsInChildren<LineRenderer>())
+        {
+            edge.SetColors(Color.black, Color.black);
+        }
+    }
+
+    public void RefreshWeights()
+    {
+        foreach(int i in graph.AdjacencyList.Keys)
+        {
+            foreach(int j in graph.AdjacencyList[i])
+            {
+                weights[new KeyValuePair<int, int>(i, j)].GetComponentInChildren<Text>().text = graph.getWeightsforEdge(i, j).ToString();
+            }
+        }
     }
 }

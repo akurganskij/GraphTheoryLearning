@@ -72,8 +72,10 @@
     <Compile Include="Assets\Scripts\GraphGenerator.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuNames.cs" />
     <Compile Include="Assets\Scripts\Vector.cs" />
+    <Compile Include="Assets\Scripts\Level6Menu.cs" />
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\Events\ReloadGraphEvent.cs" />
+    <Compile Include="Assets\Scripts\ResultsDataLoader.cs" />
     <Compile Include="Assets\Scripts\GraphBuilder.cs" />
     <Compile Include="Assets\Scripts\Events\IntEventInvoker.cs" />
     <Compile Include="Assets\Scripts\Point.cs" />
@@ -83,8 +85,8 @@
     <Compile Include="Assets\Scripts\CSVProcessor.cs" />
     <Compile Include="Assets\Scripts\GraphPanelLogic.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\ResultsDataLoader.cs" />
-    <Compile Include="Assets\Scripts\Level6Menu.cs" />
+    <Compile Include="Assets\Scripts\Level6Stage3Logic.cs" />
+    <Compile Include="Assets\Scripts\AnimateFordFulkerson.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

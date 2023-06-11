@@ -176,4 +176,14 @@ public class Graph
         }
         return false;
     }
+
+    public void reduceCapacity(int u, int v, int amount)
+    {
+        if(weghts.ContainsKey(new KeyValuePair<int, int>(u, v)))
+        {
+            weghts[new KeyValuePair<int, int>(u, v)] -= amount;
+        }
+    }
+
+    
 }
